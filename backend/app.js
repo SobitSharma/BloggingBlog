@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 import cookieparser from "cookie-parser"
 import connection from "./DB/Connection.db.js"
+import cors from 'cors'
 import { LoginWithUserNameAndPassword, SignUpWithUserNameAndPassword , SignInWithGmail} from "./controllers/user.controller.js"
 
 const app = express()
@@ -9,6 +10,7 @@ app.use(cookieparser());
 dotenv.configDotenv()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+app.use(cors({origin:'http://localhost:5173', credentials:true}))
 
 connection().then((res)=>{
     if(res){
